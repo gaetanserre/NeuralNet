@@ -59,6 +59,8 @@ Single prediction:
 
 #include "neuralnet.h"
 
+using namespace std;
+
 int main (int argc, char** argv) {
 	NeuralNetwork nn;
 	nn.init("weights.txt");
@@ -78,6 +80,8 @@ Multiple predictions:
 #include <vector>
 
 #include "neuralnet.h"
+
+using namespace std;
 
 int main (int argc, char** argv) {
 	NeuralNetwork nn;

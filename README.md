@@ -51,5 +51,58 @@ def saveTFModel(model, output_path):
     f.close()
 ```
 
+## Examples
+Single prediction:
+```c++
+#include <iostream>
+#include <vector>
+
+#include "neuralnet.h"
+
+int main (int argc, char** argv) {
+	NeuralNetwork nn;
+	nn.init("weights.txt");
+	vector<double> data;
+	data.push_back(1.0);
+	data.push_back(-0.62);
+	
+	cout << "Prediction: " << nn.single_predict(data) << endl;
+	
+	return 1;
+}
+```
+
+Multiple predictions:
+```c++
+#include <iostream>
+#include <vector>
+
+#include "neuralnet.h"
+
+int main (int argc, char** argv) {
+	NeuralNetwork nn;
+	nn.init("weights.txt");
+	vector<vector<double>> data;
+	vector<double> temp;
+	
+	temp.push_back(1.0);
+	temp.push_back(-0.62);
+	data.push_back(vector<double> (temp));
+	temp.clear();
+	
+	temp.push_back(-2.3);
+	temp.push_back(0.42);
+	data.push_back(vector<double> (temp));
+	temp.clear();
+	
+	vector<double> predictions = nn.predict(data);
+	for (int i = 0; i<predictions.size(); i++)
+		cout << "Prediction" << i << ": " << predictions[i] << endl;
+	
+	return 1;
+}
+```
+
+
 ## License
 [GPL v3](https://choosealicense.com/licenses/gpl-3.0/)

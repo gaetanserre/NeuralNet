@@ -10,8 +10,8 @@
 
 using namespace std;
 
-static double relu(double x) { return max(0.0, x); }
-static double dot(vector<double> u, vector<double> v) {
+double relu(double x) { return max(0.0, x); }
+double dot(vector<double> u, vector<double> v) {
   int u_size = u.size(); int v_size = v.size();
   if (u_size != v_size) {
     string error = "Dot product between vector of size " + to_string(u_size) + " and " + "vector of size " + to_string(v_size) + ".";
@@ -47,6 +47,9 @@ private:
 
 class NeuralNetwork {
 public:
+    NeuralNetwork() = default;
+    NeuralNetwork(const string& modelpath);
+
     void init (const string& modelpath);
     vector<double> predict(const vector<vector<double>>& data);
     double single_predict(vector<double> data);

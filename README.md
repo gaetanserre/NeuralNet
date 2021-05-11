@@ -62,8 +62,7 @@ Single prediction:
 using namespace std;
 
 int main (int argc, char** argv) {
-	NeuralNetwork nn;
-	nn.init("weights.txt");
+	NeuralNetwork nn("weights.txt");
 	vector<double> data;
 	data.push_back(1.0);
 	data.push_back(-0.62);

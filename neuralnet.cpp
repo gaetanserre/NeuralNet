@@ -35,6 +35,10 @@ vector<double> DenseLayer::getOutput(const vector<double>& x) {
 }
 
 
+NeuralNetwork::NeuralNetwork(const string& modelpath) {
+  this->init(modelpath);
+}
+
 DenseLayer NeuralNetwork::createLayer(vector<vector<double>> weights, vector<double> bias) {
   return DenseLayer(std::move(weights), std::move(bias));
 }

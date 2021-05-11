@@ -10,18 +10,20 @@
 #include <utility>
 
 
-Neuron::Neuron(vector<double> weights, double bias) {
+Neuron::Neuron(vector<double> weights, double bias, activationFunction afunction) {
   this->weights = std::move(weights);
   this->bias = bias;
+  this->afunction = afunction;
 }
 
-double Neuron::getOutput(vector<double> x) {
-  return relu(dot(this->weights, std::move(x)) + this->bias);
+double Neuron::getOutput(const vector<double>& x) {
+  return afunction(dot(this->weights, x) + this->bias);
 }
 
-DenseLayer::DenseLayer(vector<vector<double>> weights, vector<double> bias) {
+DenseLayer::DenseLayer(vector<vector<double>> weights, vector<double> bias, string afunction_name) {
+  this->afunction_name = std::move(afunction_name);
   for (int nb_neurons = 0; nb_neurons<weights.size(); nb_neurons++) {
-    this->neurons.emplace_back(weights[nb_neurons], bias[nb_neurons]);
+    this->neurons.emplace_back(weights[nb_neurons], bias[nb_neurons], findAFunction(this->afunction_name));
   }
 }
 
@@ -39,12 +41,19 @@ NeuralNetwork::NeuralNetwork(const string& modelpath) {
   this->init(modelpath);
 }
 
-DenseLayer NeuralNetwork::createLayer(vector<vector<double>> weights, vector<double> bias) {
-  return DenseLayer(std::move(weights), std::move(bias));
+DenseLayer NeuralNetwork::createLayer(vector<vector<double>> weights, vector<double> bias, string afunction_name) {
+  return DenseLayer(std::move(weights), std::move(bias), std::move(afunction_name));
+}
+
+
+string NeuralNetwork::getAFunctionName(const string& line) {
+  return line.substr(6);
 }
 
 void NeuralNetwork::init(const string& modelpath) {
-  vector<vector<double>> weights; vector<double> bias;
+  initDic();
+
+  vector<vector<double>> weights; vector<double> bias; string afunction;
   int nb_layer = 0;
   ifstream model_file(modelpath);
 
@@ -54,12 +63,13 @@ void NeuralNetwork::init(const string& modelpath) {
   }
 
   for(string line; getline(model_file, line);) {
-    if (line == "layer") {
+    if (line.rfind("layer", 0) == 0) {
       if (nb_layer > 0) {
-        this->layers.emplace_back(createLayer(weights, bias));
+        this->layers.emplace_back(createLayer(weights, bias, afunction));
         weights.clear();
         bias.clear();
       }
+      afunction = getAFunctionName(line);
       nb_layer++;
     } else {
       vector<double> w;
@@ -74,10 +84,19 @@ void NeuralNetwork::init(const string& modelpath) {
     }
   }
   if (!weights.empty() && !bias.empty())
-    this->layers.emplace_back(createLayer(weights, bias));
+    this->layers.emplace_back(createLayer(weights, bias, afunction));
+
+  this->initiated = true;
+}
+
+void NeuralNetwork::isInitiated() {
+  if (!this->initiated) {
+    throw runtime_error("The network must be initiated.");
+  }
 }
 
 double NeuralNetwork::single_predict(vector<double> data) {
+  this->isInitiated();
   for (DenseLayer layer : this->layers) {
     data = layer.getOutput(data);
   }
@@ -85,6 +104,7 @@ double NeuralNetwork::single_predict(vector<double> data) {
 }
 
 vector<double> NeuralNetwork::predict(const vector<vector<double>>& data) {
+  this->isInitiated();
   vector<double> res;
   res.reserve(data.size());
   for (const vector<double>& d : data) {
@@ -93,7 +113,12 @@ vector<double> NeuralNetwork::predict(const vector<vector<double>>& data) {
   return res;
 }
 
-void NeuralNetwork::printShape() {
-  for (DenseLayer layer : this->layers)
-    cout << layer.getShape() << endl;
+void NeuralNetwork::summary() {
+  this->isInitiated();
+  for (int i = 0; i<this->layers.size(); i++) {
+    int shape = this->layers[i].getShape();
+    cout << "Layer " << i << " → " << shape
+         << (shape > 1 ? " neurons" : " neuron") << " with " << this->layers[i].getAFunctionName()
+         << " activation function." << endl;
+  }
 }

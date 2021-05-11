@@ -2,7 +2,7 @@
 
 Neural Net is a C++ library able to create a neural network from a file containing the weights.
 
-Currently, only the *Dense* layers and the *Relu* activation function are available but it's quite easy to add more.
+Currently, only the *Dense* layers are available.
 
 ## Structure of the weight file
 

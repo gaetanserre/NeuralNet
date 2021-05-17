@@ -2,8 +2,8 @@
 // Created by Gaëtan on 11/05/2021.
 //
 
-#ifndef DEEP_VICTORIA_ACTIVATION_FUNCTIONS_H
-#define DEEP_VICTORIA_ACTIVATION_FUNCTIONS_H
+#ifndef ACTIVATION_FUNCTIONS_H
+#define ACTIVATION_FUNCTIONS_H
 
 #include <vector>
 #include <math.h>
@@ -52,4 +52,4 @@ static activationFunction findAFunction(std::string name) {
 }
 
 
-#endif //DEEP_VICTORIA_ACTIVATION_FUNCTIONS_H
+#endif //ACTIVATION_FUNCTIONS_H

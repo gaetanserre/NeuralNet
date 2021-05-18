@@ -73,7 +73,7 @@ int main (int argc, char** argv) {
   data.push_back(763);
   data.push_back(151);
 	
-  cout << "Prediction: " << nn.single_predict(data) << endl;
+  cout << "Prediction: " << nn.single_predict(data)[0] << endl;
 	
   return 1;
 }
@@ -115,7 +115,7 @@ int main (int argc, char** argv) {
 	
   vector<double> predictions = nn.predict(data);
   for (int i = 0; i<predictions.size(); i++)
-	  cout << "Prediction" << i << ": " << predictions[i] << endl;
+	  cout << "Prediction" << i << ": " << predictions[i][0] << endl;
 	
   return 1;
 }

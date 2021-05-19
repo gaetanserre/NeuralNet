@@ -1,6 +1,6 @@
 # Neural Net
 
-Neural Net is a C++ library able to create a neural network from a file containing the weights.
+Neural Net is a C++ library able to easely create and use a neural network from a file containing its weights.
 
 Currently, only the *Dense* layers are available.
 
@@ -16,7 +16,7 @@ w1,1 w1,2 w1,3 b1
 w2,1 w2,2 w2,3 b2
 ...
 ```
-Where 
+Where:
 + *wi,d* is the weight at dimension *d* for the neuron number *i*.
 + *bi* is the bias of the neuron number *i*.
 + *activation_function* is the activation function of each neuron in the layer. (See [Activation functions](#activation-functions) section below).
@@ -66,12 +66,12 @@ Single prediction:
 using namespace std;
 
 int main (int argc, char** argv) {
-  NeuralNetwork nn("weights.nn");
+  NeuralNetwork nn("example_weights.nn");
   nn.summary();
   
   vector<double> data;
-  data.push_back(763);
-  data.push_back(151);
+  data.push_back(1265);
+  data.push_back(88);
 	
   cout << "Prediction: " << nn.single_predict(data)[0] << endl;
 	
@@ -81,9 +81,15 @@ int main (int argc, char** argv) {
 
 Output:
 ```
-Layer 0 → 2 neurons with tanh activation function.
-Layer 1 → 1 neuron with linear activation function.
-Prediction: 0.0295543
+Network summary:
+--------------------------------------------------------
+Layer 0 → 256 neurons with relu activation function.
+Layer 1 → 128 neurons with relu activation function.
+Layer 2 → 64 neurons with relu activation function.
+Layer 3 → 1 neuron with linear activation function.
+--------------------------------------------------------
+
+Prediction: 1.44234
 ```
 
 Multiple predictions:
@@ -97,23 +103,23 @@ using namespace std;
 
 int main (int argc, char** argv) {
   NeuralNetwork nn;
-  nn.init("weights.nn");
+  nn.init("example_weights.nn");
   nn.summary();
 
   vector<vector<double>> data;
   vector<double> temp;
 	
-  temp.push_back(1.0);
-  temp.push_back(-0.62);
+  temp.push_back(154);
+  temp.push_back(675);
   data.push_back(vector<double> (temp));
   temp.clear();
 	
-  temp.push_back(-2.3);
-  temp.push_back(0.42);
+  temp.push_back(2312);
+  temp.push_back(832);
   data.push_back(vector<double> (temp));
   temp.clear();
 	
-  vector<double> predictions = nn.predict(data);
+  vector<vector<double>> predictions = nn.predict(data);
   for (int i = 0; i<predictions.size(); i++)
 	  cout << "Prediction" << i << ": " << predictions[i][0] << endl;
 	
@@ -123,11 +129,27 @@ int main (int argc, char** argv) {
 
 Output:
 ```
-Layer 0 → 64 neurons with tanh activation function.
-Layer 1 → 256 neurons with softplus activation function.
-Layer 2 → 1 neuron with linear activation function.
-Prediction0: 0.622099
-Prediction1: 0.477628
+Network summary:
+--------------------------------------------------------
+Layer 0 → 256 neurons with relu activation function.
+Layer 1 → 128 neurons with relu activation function.
+Layer 2 → 64 neurons with relu activation function.
+Layer 3 → 1 neuron with linear activation function.
+--------------------------------------------------------
+
+Prediction0: 0.407461
+Prediction1: 1.18481
+```
+
+## References
+Please cite Neural Net in your publications if this is useful for your research. Here is an example BibTeX entry:
+```
+@misc{serre2021neuralnet,
+  title={NeuralNet},
+  author={Gaëtan Serré},
+  year={2021},
+  howpublished={\url{https://github.com/LE10EENFAIT/NeuralNet}},
+}
 ```
 
 

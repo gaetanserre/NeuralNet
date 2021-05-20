@@ -145,7 +145,7 @@ Prediction1: 1.18481
 Please cite Neural Net in your publications if this is useful for your research. Here is an example BibTeX entry:
 ```
 @misc{serre2021neuralnet,
-  title={NeuralNet},
+  title={Neural Net},
   author={Gaëtan Serré},
   year={2021},
   howpublished={\url{https://github.com/LE10EENFAIT/NeuralNet}},

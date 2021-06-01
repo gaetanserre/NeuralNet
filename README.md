@@ -69,9 +69,7 @@ int main (int argc, char** argv) {
   NeuralNetwork nn("example_weights.nn");
   nn.summary();
   
-  vector<double> data;
-  data.push_back(1265);
-  data.push_back(88);
+  vector<double> data {1265, 88};
 	
   cout << "Prediction: " << nn.single_predict(data)[0] << endl;
 	
@@ -106,19 +104,8 @@ int main (int argc, char** argv) {
   nn.init("example_weights.nn");
   nn.summary();
 
-  vector<vector<double>> data;
-  vector<double> temp;
-	
-  temp.push_back(154);
-  temp.push_back(675);
-  data.push_back(vector<double> (temp));
-  temp.clear();
-	
-  temp.push_back(2312);
-  temp.push_back(832);
-  data.push_back(vector<double> (temp));
-  temp.clear();
-	
+  vector<vector<double>> data {{154, 675}, {2312, 832}};
+
   vector<vector<double>> predictions = nn.predict(data);
   for (int i = 0; i<predictions.size(); i++)
 	  cout << "Prediction" << i << ": " << predictions[i][0] << endl;

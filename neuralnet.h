@@ -52,8 +52,6 @@ private:
 
     vector<DenseLayer> layers;
     bool initiated = false;
-
-
 };
 
 #endif //NEURALNET_H

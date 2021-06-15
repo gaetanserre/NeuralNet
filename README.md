@@ -61,7 +61,7 @@ Single prediction:
 #include <iostream>
 #include <vector>
 
-#include "neuralnet.h"
+#include "neuralnet.hpp"
 
 using namespace std;
 
@@ -95,7 +95,7 @@ Multiple predictions:
 #include <iostream>
 #include <vector>
 
-#include "neuralnet.h"
+#include "neuralnet.hpp"
 
 using namespace std;
 

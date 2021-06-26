@@ -1,6 +1,7 @@
 # Neural Net
 
 Neural Net is a C++ library able to easely create and use a neural network from a file containing its weights.
+The vector product is parallelized using `pthread`. (Disabled by default)
 
 Currently, only the *Dense* layers are available.
 
@@ -102,6 +103,7 @@ using namespace std;
 int main (int argc, char** argv) {
   NeuralNetwork nn;
   nn.init("example_weights.nn");
+  nn.parallelization = true;
   nn.summary();
 
   vector<vector<double>> data {{154, 675}, {2312, 832}};

@@ -126,8 +126,8 @@ Layer 2 → 64 neurons with relu activation function.
 Layer 3 → 1 neuron with linear activation function.
 --------------------------------------------------------
 
-Prediction0: 0.407461
-Prediction1: 1.18481
+Prediction 0: 0.407461
+Prediction 1: 1.18481
 ```
 
 ## References

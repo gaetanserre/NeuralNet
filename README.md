@@ -1,7 +1,7 @@
 # Neural Net
 
 Neural Net is a C++ library able to easely create and use a neural network from a file containing its weights.
-The vector product is parallelized using `pthread`. (Disabled by default)
+The vector product is parallelized using `pthread` (Disabled by default).
 
 Currently, only the *Dense* layers are available.
 
@@ -39,7 +39,7 @@ def saveTFModel(model, output_path):
       for i in range(nb_neurons):
         for j in range(dimensions):
         	s += str(weights[j][i]) + " "
-      	s+= str(bias[i]) + "\n"
+      	s += str(bias[i]) + "\n"
         
   f = open(output_path, "w")
   f.write(s)
@@ -71,8 +71,8 @@ int main (int argc, char** argv) {
   nn.summary();
   
   vector<double> data {1265, 88};
-	
-  cout << "Prediction: " << nn.single_predict(data)[0] << endl;
+
+  printf("Prediction: %f\n", nn.single_predict(data)[0]);
 	
   return 1;
 }
@@ -110,7 +110,7 @@ int main (int argc, char** argv) {
 
   vector<vector<double>> predictions = nn.predict(data);
   for (int i = 0; i<predictions.size(); i++)
-	  cout << "Prediction" << i << ": " << predictions[i][0] << endl;
+    printf("Prediction %d: %f\n", i, predictions[i][0]);
 	
   return 1;
 }

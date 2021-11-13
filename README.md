@@ -143,4 +143,4 @@ Please cite Neural Net in your publications if this is useful for your research.
 
 
 ## License
-[GPL v3](https://choosealicense.com/licenses/gpl-3.0/)
+[MIT](https://choosealicense.com/licenses/mit/)

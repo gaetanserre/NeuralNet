@@ -130,17 +130,5 @@ Prediction 0: 0.407461
 Prediction 1: 1.18481
 ```
 
-## References
-Please cite Neural Net in your publications if this is useful for your research. Here is an example BibTeX entry:
-```
-@misc{serre2021neuralnet,
-  title={Neural Net},
-  author={Gaëtan Serré},
-  year={2021},
-  howpublished={\url{https://github.com/LE10EENFAIT/NeuralNet}},
-}
-```
-
-
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

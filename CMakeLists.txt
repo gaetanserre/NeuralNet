@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.22)
+project(mul)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
+
+include_directories(Eigen/)
+
+file (GLOB_RECURSE SRC_FILES src/*.cc)
+add_executable(mul ${SRC_FILES})

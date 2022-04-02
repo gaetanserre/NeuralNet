@@ -1,19 +1,23 @@
 #include <iostream>
-#include <../Eigen/Dense>
+#include <Eigen/Dense>
+#include <matrix.hh>
 
 int main(int argc, char** argv) {
-  Eigen::Matrix2d mat;
-  mat << 1, 2,
-         3, 4;
-  Eigen::Vector2d u(-1,1), v(2,0);
-  std::cout << "Here is mat*mat:\n" << mat*mat << std::endl;
-  std::cout << "Here is mat*u:\n" << mat*u << std::endl;
-  std::cout << "Here is u^T*mat:\n" << u.transpose()*mat << std::endl;
-  std::cout << "Here is u^T*v:\n" << u.transpose()*v << std::endl;
-  std::cout << "Here is u*v^T:\n" << u*v.transpose() << std::endl;
-  std::cout << "Let's multiply mat by itself" << std::endl;
-  mat = mat*mat;
-  std::cout << "Now mat is mat:\n" << mat << std::endl;
+
+  Matrix a(20, 20);
+  Matrix v(20, 1);
+
+  std::cout << a << std::endl;
+
+  auto f = []{return 2.0;};
+  a.init_values(f);
+
+  auto f2 = []{return 4.0;};
+  v.init_values(f2);
+
+  std::cout << a%v << std::endl;
+
+  std::cout << v.transpose()%v << std::endl;
 
   return 0;
 }
